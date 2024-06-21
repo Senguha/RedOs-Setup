@@ -56,7 +56,7 @@ curl https://products.s.kaspersky-labs.com/endpoints/keslinux10/11.3.0.7441/mult
 
 dnf install kesl-11.3.0-7441.x86_64.rpm perl-Getopt-Long perl-File-Copy
 
-/opt/kaspersky/kesl/bin/kesl-setup.pl --autoinstall=<./autoKSM.env>
+/opt/kaspersky/kesl/bin/kesl-setup.pl --autoinstall=autoKSM.env
 
 
 
