@@ -38,4 +38,27 @@ ln -s /usr/lib/x86_64-linux-gnu/libstdc++.so.6 /opt/1cv8/common/libstdc++.so.6
 mv /opt/1cv8/x86_64/8.3.23.1782/libstdc++.so.6 /opt/1cv8/x86_64/8.3.23.1782/libstdc++.so.6.old
 ln -s /usr/lib/x86_64-linux-gnu/libstdc++.so.6 /opt/1cv8/x86_64/8.3.23.1782/libstdc++.so.6
 
+cd ..
+
+read -p "Удалить архив с пакетами 1С из директории? " -n 1 -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+        rm -r ./1c-paks.tar.gz
+fi
+
+rm -r ./1c-paks
+
+
+echo "Установка Kaspersky Endpoint Security"
+
+curl https://products.s.kaspersky-labs.com/endpoints/keslinux10/11.3.0.7441/multilanguage-11.3.0.7441/3635353133317c44454c7c31/kesl-11.3.0-7441.x86_64.rpm -o kesl-11.3.0-7441.x86_64.rpm
+
+dnf install kesl-11.3.0-7441.x86_64.rpm perl-Getopt-Long perl-File-Copy
+
+/opt/kaspersky/kesl/bin/kesl-setup.pl --autoinstall=<./autoKSM.env>
+
+
+
+
 
