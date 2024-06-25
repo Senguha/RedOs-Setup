@@ -1,9 +1,17 @@
 - hosts: myhosts
+  remote_user: root
   tasks:
-    - name: move folder to host
-      copy:
-        src: ../script
-        dest: /home/user
-    - name: Run the setup script
-      command: bash /home/user/script/setup.sh
+    - name: bla bla
+      block:  
+      - name: Move bash script folder to host
+        copy:
+          src: ../Bash script
+          dest: ./
+      - name: Run the setup script
+        shell: bash ./Bash\ script/setup.sh
+      always:  
+      - name: Clean up script folder
+        file:
+          path: ./Bash script
+          state: absent 
 
