@@ -53,23 +53,24 @@ echo "Установка клиента 1C"
 
 if [[ -z "$iStatus" ]]; 
 then
-    dnf install cabextract-1.9.1-3.red80.x86_64.rpm xorg-x11-font-utils-7.5-53.red80.x86_64.rpm enchant-1.6.0-29.red80.x86_64.rpm msttcore-fonts-installer-2.6-3.noarch.rpm -y
+    dnf install cabextract-1.9.1-3.red80.x86_64.rpm xorg-x11-font-utils-7.5-53.red80.x86_64.rpm enchant-1.6.0-29.red80.x86_64.rpm msttcore-fonts-installer-2.6-3.noarch.rpm  -y
 else
-    dnf install msttcore-fonts-installer -y
+    dnf install msttcore-fonts-installer libxcrypt-compat -y
 fi
 
 cd 1c-paks
 
-dnf install 1c-enterprise-8.3.23.1782-common-8.3.23-1782.x86_64.rpm 1c-enterprise-8.3.23.1782-server-8.3.23-1782.x86_64.rpm 1c-enterprise-8.3.23.1782-client-8.3.23-1782.x86_64.rpm -y
+chmod +x setup-full-8.3.23.2040-x86_64.run
+
+./setup-full-8.3.23.2040-x86_64.run --mode unattended --disable-components client_full --enable-components server,ws,server_admin,config_storage_server,liberica_jre
+
 
 cd ..
 
 mv /opt/1cv8/common/libstdc++.so.6 /opt/1cv8/common/libstdc++.so.6.old
-ln -s /usr/lib/x86_64-linux-gnu/libstdc++.so.6 /opt/1cv8/common/libstdc++.so.6
-mv /opt/1cv8/x86_64/8.3.23.1782/libstdc++.so.6 /opt/1cv8/x86_64/8.3.23.1782/libstdc++.so.6.old
-ln -s /usr/lib/x86_64-linux-gnu/libstdc++.so.6 /opt/1cv8/x86_64/8.3.23.1782/libstdc++.so.6
-
-
+ ln -s /usr/lib/x86_64-linux-gnu/libstdc++.so.6 /opt/1cv8/common/libstdc++.so.6
+ mv /opt/1cv8/x86_64/8.3.23.2040/libstdc++.so.6 /opt/1cv8/x86_64/8.3.23.2040/libstdc++.so.6.old
+ ln -s /usr/lib/x86_64-linux-gnu/libstdc++.so.6 /opt/1cv8/x86_64/8.3.23.2040/libstdc++.so.6
 
 echo "Установка Kaspersky Endpoint Security"
 
