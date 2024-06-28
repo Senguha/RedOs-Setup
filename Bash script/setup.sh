@@ -19,7 +19,7 @@ fi
 
 if [[ -z "$iStatus" && -n "$paksFolder" ]]; then
 paksList="`ls ./paks`"
-paksCheckOffline="`echo $paksList | grep '1c-paks.tar.gz' | grep 'cprocsp-paks.tar.gz' | grep 'cabextract-1.9.1-3.red80.x86_64.rpm' | grep 'enchant-1.6.0-29.red80.x86_64.rpm'| grep 'kesl-11.3.0-7441.x86_64.rpm'| grep 'kesl-gui-11.3.0-7441.x86_64.rpm'| grep 'msttcore-fonts-installer-2.6-3.noarch.rpm'| grep 'perl-File-Copy-2.39-494.red80.noarch.rpm'| grep 'perl-Getopt-Long-2.52-494.red80.noarch.rpm'| grep 'xorg-x11-font-utils-7.5-53.red80.x86_64.rpm'`"
+paksCheckOffline="`echo $paksList | grep '1c-paks.tar.gz' | grep 'cprocsp-paks.tar.gz' | grep 'cabextract-1.9.1-3.red80.x86_64.rpm' | grep 'kesl-11.3.0-7441.x86_64.rpm'| grep 'kesl-gui-11.3.0-7441.x86_64.rpm'| grep 'msttcore-fonts-installer-2.6-3.noarch.rpm'| grep 'perl-File-Copy-2.39-494.red80.noarch.rpm'| grep 'perl-Getopt-Long-2.52-494.red80.noarch.rpm'| grep 'xorg-x11-font-utils-7.5-53.red80.x86_64.rpm'`"
 paksCheckOnline="`echo $paksList | grep '1c-paks.tar.gz' | grep 'cprocsp-paks.tar.gz' | grep 'kesl-11.3.0-7441.x86_64.rpm'| grep 'kesl-gui-11.3.0-7441.x86_64.rpm'`"
 fi
 
@@ -53,16 +53,16 @@ echo "Установка клиента 1C"
 
 if [[ -z "$iStatus" ]]; 
 then
-    dnf install cabextract-1.9.1-3.red80.x86_64.rpm xorg-x11-font-utils-7.5-53.red80.x86_64.rpm enchant-1.6.0-29.red80.x86_64.rpm msttcore-fonts-installer-2.6-3.noarch.rpm  -y
+    dnf install cabextract-1.9.1-3.red80.x86_64.rpm xorg-x11-font-utils-7.5-53.red80.x86_64.rpm msttcore-fonts-installer-2.6-3.noarch.rpm  -y
 else
-    dnf install msttcore-fonts-installer libxcrypt-compat -y
+    dnf install msttcore-fonts-installer -y
 fi
 
 cd 1c-paks
 
-chmod +x setup-full-8.3.23.2040-x86_64.run
+chmod +x ./setup-full-8.3.23.2040-x86_64.run
 
-./setup-full-8.3.23.2040-x86_64.run --mode unattended --disable-components client_full --enable-components server,ws,server_admin,config_storage_server,liberica_jre
+./setup-full-8.3.23.2040-x86_64.run --mode unattended --enable-components client_full,client_thin,liberica_jre
 
 
 cd ..
