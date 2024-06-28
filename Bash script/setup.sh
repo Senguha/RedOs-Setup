@@ -8,18 +8,19 @@ fi
 
 cd /root/Bash\ script
 
+
 $iStatus
-paksFolder="`ls | grep -x 'paks'`"
-
-
 
 if nc -zw1 google.com 443; then
      iStatus="True"
 fi
 
+
+paksFolder="`ls | grep -x 'paks'`"
+
 if [[ -z "$iStatus" && -n "$paksFolder" ]]; then
 paksList="`ls ./paks`"
-paksCheckOffline="`echo $paksList | grep '1c-paks.tar.gz' | grep 'cprocsp-paks.tar.gz' | grep 'cabextract-1.9.1-3.red80.x86_64.rpm' | grep 'kesl-11.3.0-7441.x86_64.rpm'| grep 'kesl-gui-11.3.0-7441.x86_64.rpm'| grep 'msttcore-fonts-installer-2.6-3.noarch.rpm'| grep 'perl-File-Copy-2.39-494.red80.noarch.rpm'| grep 'perl-Getopt-Long-2.52-494.red80.noarch.rpm'| grep 'xorg-x11-font-utils-7.5-53.red80.x86_64.rpm'`"
+paksCheckOffline="`echo $paksList | grep '1c-paks.tar.gz' | grep 'cprocsp-paks.tar.gz' | grep 'cabextract-1.9.1-3.red80.x86_64.rpm' | grep 'kesl-11.3.0-7441.x86_64.rpm'| grep 'kesl-gui-11.3.0-7441.x86_64.rpm'| grep 'msttcore-fonts-installer-2.6-3.noarch.rpm'| grep 'perl-File-Copy-2.39-494.red80.noarch.rpm'| grep 'perl-Getopt-Long-2.52-494.red80.noarch.rpm'| grep 'xorg-x11-font-utils-7.5-53.red80.x86_64.rpm' | grep 'ifd-rutokens-1.0.7-1.red80.x86_64.rpm'`"
 paksCheckOnline="`echo $paksList | grep '1c-paks.tar.gz' | grep 'cprocsp-paks.tar.gz' | grep 'kesl-11.3.0-7441.x86_64.rpm'| grep 'kesl-gui-11.3.0-7441.x86_64.rpm'`"
 fi
 
@@ -103,6 +104,15 @@ libapi10="`ls | grep libcapi10 | tail -1`"
 libapi20="`ls | grep libcapi20 | tail -1`"
 
 gcc -shared -Wl,-soname,$libapi10,$libapi10 -o libcapilite.so
+
+cd /root/Bash\ script/paks
+
+if [[ -z "$iStatus" ]];
+then
+    dnf install ifd-rutokens-1.0.7-1.red80.x86_64.rpm -y
+else
+    dnf install ifd-rutokens -y
+fi
 
 
 
