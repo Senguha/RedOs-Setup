@@ -73,6 +73,20 @@ mv /opt/1cv8/common/libstdc++.so.6 /opt/1cv8/common/libstdc++.so.6.old
  mv /opt/1cv8/x86_64/8.3.23.2040/libstdc++.so.6 /opt/1cv8/x86_64/8.3.23.2040/libstdc++.so.6.old
  ln -s /usr/lib/x86_64-linux-gnu/libstdc++.so.6 /opt/1cv8/x86_64/8.3.23.2040/libstdc++.so.6
 
+
+echo "Установка R7-офис"
+
+tar -xzf R7-paks.tar.gz
+cd R7-paks
+
+if [[ -n "$iStatus" ]]; then
+    dnf install r7-release -y && dnf install r7-office -y && dnf install r7organizer -y && dnf install R7Grafika -y
+else
+    dnf install r7-release-1.0-1.red80.noarch.rpm r7-office-2024.3.1-487.el8.x86_64.rpm r7organizer-2.0.1-1.x86_64.rpm  R7Grafika-x86_64-1.8.221111227.rpm -y
+fi
+
+
+
 echo "Установка Kaspersky Endpoint Security"
 
 if [[ -z "$iStatus" ]]; 
@@ -87,6 +101,8 @@ if [[ -n "$iStatus" ]]; then
 fi
 
 dnf install kesl-gui-11.3.0-7441.x86_64.rpm -y
+
+
 
 echo "Установка КриптоПРО"
 
