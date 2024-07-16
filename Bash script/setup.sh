@@ -85,6 +85,7 @@ else
     dnf install r7-release-1.0-1.red80.noarch.rpm r7-office-2024.3.1-487.el8.x86_64.rpm r7organizer-2.0.1-1.x86_64.rpm  R7Grafika-x86_64-1.8.221111227.rpm -y
 fi
 
+cd ..
 
 
 echo "Установка Kaspersky Endpoint Security"
